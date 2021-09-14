@@ -53,6 +53,10 @@ class MenusTable extends Table
             'targetForeignKey' => 'grupo_id',
             'joinTable' => 'grupos_menus',
         ]);
+        $this->hasMany('ChildrenMenus', [
+            'className'=>'Menus',
+            'foreignKey' => 'menu_id'
+        ]);
     }
 
     /**

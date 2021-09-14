@@ -108,4 +108,39 @@ class UsuariosController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function login()
+    {
+        $this->viewBuilder()->setLayout('login');
+        if ($this->request->is('post')) {
+            $usuario = $this->Auth->identify();
+            if ($usuario) {
+                $usuario['grupo'] = $this->Usuarios->Grupos->get($usuario['grupo_id']);
+                $this->Auth->setUser($usuario);    
+                //Redireccioar a la pagina de logueo
+                // return $this->redirect(
+                //     ['controller' => $user['co_grupo']['pagina_inicial'] , 'action' => 'index']
+                // );
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+            $this->Flash->error('Nombre de usuario o contraseña incorrectas.');
+        }
+    }
+    
+    public function logout()
+    {
+        $this->request->getSession()->destroy();
+        return $this->redirect($this->Auth->logout());
+    }
+
+    public function settheme()
+    {
+        $id = $this->request->getSession()->read('Auth.User.id');
+        $usuario = $this->Usuarios->get($id);
+        if($this->Usuarios->save($usuario)){
+            return $this->response->withType("application/json")->withStringBody(json_encode(1));
+        } else{
+            return $this->response->withType("application/json")->withStringBody(json_encode(0));
+        }
+    }
 }

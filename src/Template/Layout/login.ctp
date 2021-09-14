@@ -1,64 +1,93 @@
-<section class="row flexbox-container">
-    <div class="col-xl-8 col-11 d-flex justify-content-center">
-        <div class="card bg-authentication rounded-0 mb-0">
-            <div class="row m-0">
-                <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-1 py-0">
-                    <img src="<?= $this->Url->Image('login.png'); ?>" alt="branding logo">
-                </div>
-                <div class="col-lg-6 col-12 p-0">
-                    <div class="card rounded-0 mb-0 px-2">
-                    <p class="px-2">
-                            <?= $this->Flash->render() ?>
-                        </p>
-                        <div class="card-header pb-1">
-                            <div class="card-title">
-                                <h4 class="mb-0">Inicio de sesión</h4>
-                            </div>
-                        </div>
-                        <p class="px-2">Bienvenido/a de nuevo, por favor inicia sesión para acceder a tu cuenta.</p>
 
-                        <div class="card-content">
-                            <div class="card-body pt-1">
-                                <?= $this->Form->create() ?>
-                                    <fieldset class="form-label-group form-group position-relative has-icon-left">
-                                        <input type="text" class="form-control" id="user" name="user" placeholder="Username" required>
-                                        <div class="form-control-position">
-                                            <i class="feather icon-user"></i>
-                                        </div>
-                                        <label for="user-name">Usuario</label>
-                                    </fieldset>
-                                    <fieldset class="form-label-group position-relative has-icon-left">
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                                        <div class="form-control-position">
-                                            <i class="feather icon-lock"></i>
-                                        </div>
-                                        <label for="user-password">Contraseña</label>
-                                    </fieldset>
-                                    <div class="form-group d-flex justify-content-between align-items-center">
-                                        <!-- <div class="text-left">
-                                            <fieldset class="checkbox">
-                                                <div class="vs-checkbox-con vs-checkbox-primary">
-                                                    <input type="checkbox">
-                                                    <span class="vs-checkbox">
-                                                        <span class="vs-checkbox--check">
-                                                            <i class="vs-icon feather icon-check"></i>
-                                                        </span>
-                                                    </span>
-                                                    <span class="">Recuerdame</span>
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+	<meta name="robots" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Invome : Invome Admin  Bootstrap 5 Template" />
+	<meta property="og:title" content="Invome : Invome Admin  Bootstrap 5 Template" />
+	<meta property="og:description" content="Invome : Invome Admin  Bootstrap 5 Template" />
+	<meta property="og:image" content="https://invome.dexignlab.com/xhtml/social-image.png" />
+	<meta name="format-detection" content="telephone=no">
+	
+	<!-- PAGE TITLE HERE -->
+	<title>Invome Admin Dashboard</title>
+	
+	<!-- FAVICONS ICON -->
+    <link rel="shortcut icon" type="image/png" href="<?= $this->Url->Image('favicon.png') ?>">
+    <?= $this->Html->css('style.css') ?>
+    
+</head>
+
+<body class="vh-100">
+    <div class="authincation h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-6">
+                    <div class="authincation-content">
+                        <div class="row no-gutters">
+                            <div class="col-xl-12">
+                                <div class="auth-form">
+									<div class="text-center mb-3">
+                                        <img src="<?= $this->Url->Image('logo-full.png'); ?>"alt="">
+									</div>
+                                    <h4 class="text-center mb-4">Inicie sesión en su cuenta</h4>
+                                
+                                        <?= $this->Flash->render() ?>
+                        
+                                        <?= $this->Form->create() ?>
+                                            <div class="mb-3">
+                                                    <label class="mb-1"><strong>Usuario</strong></label>
+                                                    <input type="text"id="usuario" name="usuario" class="form-control" placeholder="Usuario">
                                                 </div>
-                                            </fieldset>
-                                        </div> -->
-                                        <!-- <div class="text-right"><a href="#" class="card-link">¿Contraseña olvidada?</a></div> -->
-                                    </div>
-                                    <button type="submit" class="btn btn-primary float-right btn-inline">Iniciar</button>
-                                <?= $this->Form->end() ?>
+                                                <div class="mb-3">
+                                                    <label class="mb-1"><strong>Contraseña</strong></label>
+                                                    <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña">
+                                                </div>
+                                                <div class="row d-flex justify-content-between mt-4 mb-2">
+                                                    <div class="mb-3">
+                                                    <!-- <div class="form-check custom-checkbox ms-1">
+                                                            <input type="checkbox" class="form-check-input" id="basic_checkbox_1">
+                                                            <label class="form-check-label" for="basic_checkbox_1">Remember my preference</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <a href="page-forgot-password.html">Forgot Password?</a>
+                                                    </div> -->
+                                                </div>
+                                                <div class="text-center">
+                                                    <button type="submit" class="btn btn-primary btn-block">Iniciar Sesion</button>
+                                            </div>
+                                        
+                                        <?= $this->Form->end() ?>
+                                    <!-- <div class="new-account mt-3">
+                                        <p>Don't have an account? <a class="text-primary" href="./page-register.html">Sign up</a></p>
+                                    </div> -->
+                                </div>
                             </div>
-                        </div>
-                        <div class="login-footer">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <?= $this->Html->script('/vendor/global/global.min.js') ?>
+    <?= $this->Html->script('custom.min.js') ?>
+    <?= $this->Html->script('dlabnav-init.js') ?>
+    <?= $this->Html->script('styleSwitcher.js') ?>
+</body>
+</html>
+
+
+
