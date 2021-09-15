@@ -97,7 +97,8 @@ class PermisosController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $permiso = $this->Permisos->get($id);
-        if ($this->Permisos->delete($permiso)) {
+        $permiso->activo = 0;
+        if ($this->Permisos->save($permiso)) {
             $this->Flash->success(__('The permiso has been deleted.'));
         } else {
             $this->Flash->error(__('The permiso could not be deleted. Please, try again.'));

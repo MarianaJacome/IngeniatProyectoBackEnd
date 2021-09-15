@@ -150,44 +150,26 @@
                             <div id="my-posts" class="tab-pane fade active show">
                                 <div class="my-post-content pt-3">
                                     <div class="post-input">
-                                        <textarea name="textarea" id="textarea" cols="30" rows="5" class="form-control bg-transparent" placeholder="¿Qué estás pensando?"></textarea>
-
-                                        <!-- Modal -->
                                         
-                                        <a href="javascript:void(0);" class="btn btn-primary light me-1 px-3" data-bs-toggle="modal" data-bs-target="#cameraModal"><i class="fa fa-camera m-0"></i> </a>
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="cameraModal">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Upload images</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal">
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="input-group mb-3">
-                                                            <span class="input-group-text">Upload</span>
-                                                            <div class="form-file">
-                                                                <input type="file" class="form-file-input form-control">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#postModal">Publicar</a>
+                                        <span type="button" href="javascript:void(0);"  data-bs-toggle="modal" data-bs-target="#postModal"  class="btn btn-outline-primary col-md-12  " style="text-align:left" >¿Qué estás pensando?
+                                            <a >
+                                            </a>
+                                        </span>
                                         <!-- Modal -->
                                         <div class="modal fade" id="postModal">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">Mis Publicaciones</h5>
+                                                        <h5 class="modal-title">Crear Publicacion</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal">
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                            <textarea name="textarea" id="textarea2" cols="30" rows="5" class="form-control bg-transparent" placeholder="¿Qué estás pensando?"></textarea>
-                                                            <a class="btn btn-primary btn-rounded" href="javascript:void(0)">Publicar</a>																		 
+                                                            <input type="text" id="titulo"  name="" class="form-control " placeholder="Titulo">
+                                                            <textarea name="textarea" id="descripcion"  rows="15" style="height:150px" class="form-control bg-transparent" placeholder="¿Qué estás pensando?"></textarea>
+                                                            <a href="javascript:void(0);" class="btn btn-primary light me-1 px-3" data-bs-toggle="modal" data-bs-target="#cameraModal"><i class="fa fa-camera m-0"></i> </a>
+                                                            <a class="btn btn-primary btn-rounded" id="publicar" href="javascript:void(0)">Publicar</a>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -208,50 +190,6 @@
                             </div>
                             <div id="about-me" class="tab-pane fade">
                             <div class="my-post-content pt-3">
-                                    <div class="post-input">
-                                        <textarea name="textarea" id="textarea" cols="30" rows="5" class="form-control bg-transparent" placeholder="Please type what you want...."></textarea>
-
-                                        <!-- Modal -->
-                                        
-                                        <a href="javascript:void(0);" class="btn btn-primary light me-1 px-3" data-bs-toggle="modal" data-bs-target="#cameraModal"><i class="fa fa-camera m-0"></i> </a>
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="cameraModal">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Upload images</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal">
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="input-group mb-3">
-                                                            <span class="input-group-text">Upload</span>
-                                                            <div class="form-file">
-                                                                <input type="file" class="form-file-input form-control">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#postModal">Publicar</a>
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="postModal">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Mis Publicaciones</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal">
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                            <textarea name="textarea" id="textarea2" cols="30" rows="5" class="form-control bg-transparent" placeholder="Please type what you want...."></textarea>
-                                                            <a class="btn btn-primary btn-rounded" href="javascript:void(0)">Publicar</a>																		 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="profile-uoloaded-post border-bottom-1 pb-5">
                                         <div class="media pt-5 pb-5">
                                           
@@ -290,61 +228,28 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
 
+<script>
+    var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>
 
+    $('#publicar').click(function(){
 
+    var titulo = $('#titulo').val();
+    var descripcion = $('#descripcion').val();
 
-<!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Publicacione'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Usuarios'), ['controller' => 'Usuarios', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Usuario'), ['controller' => 'Usuarios', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Cat Estatus'), ['controller' => 'CatEstatus', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Cat Estatus'), ['controller' => 'CatEstatus', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="publicaciones index large-9 medium-8 columns content">
-    <h3><?= __('Publicaciones') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('usuario_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('cat_estatu_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('titulo') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($publicaciones as $publicacione): ?>
-            <tr>
-                <td><?= h($publicacione->id) ?></td>
-                <td></td>
-                <td><?= $publicacione->has('cat_estatus') ? $this->Html->link($publicacione->cat_estatus->id, ['controller' => 'CatEstatus', 'action' => 'view', $publicacione->cat_estatus->id]) : '' ?></td>
-                <td><?= h($publicacione->titulo) ?></td>
-                <td><?= h($publicacione->created) ?></td>
-                <td><?= h($publicacione->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $publicacione->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $publicacione->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $publicacione->id], ['confirm' => __('Are you sure you want to delete # {0}?', $publicacione->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
-</div> -->
+    //Validar los campos que no esten vacios
+
+    $.ajax({
+        headers: {
+            'X-CSRF-Token': csrfToken
+        },    
+        type: "POST",
+        data: { titulo : titulo , descripcion : descripcion },
+        url: "<?= $this->Url->build(["controller" => "publicaciones","action" => "publicacion"]);?>",
+        success:function(data){
+           
+        }
+    })
+})
+</script>

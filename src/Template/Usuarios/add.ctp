@@ -4,30 +4,73 @@
  * @var \App\Model\Entity\Usuario $usuario
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Usuarios'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Grupos'), ['controller' => 'Grupos', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Grupo'), ['controller' => 'Grupos', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Publicaciones'), ['controller' => 'Publicaciones', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Publicacione'), ['controller' => 'Publicaciones', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="usuarios form large-9 medium-8 columns content">
-    <?= $this->Form->create($usuario) ?>
-    <fieldset>
-        <legend><?= __('Add Usuario') ?></legend>
-        <?php
-            echo $this->Form->control('grupo_id', ['options' => $grupos]);
-            echo $this->Form->control('nombre');
-            echo $this->Form->control('apellido');
-            echo $this->Form->control('correo');
-            echo $this->Form->control('usuario');
-            echo $this->Form->control('password');
-            echo $this->Form->control('activo');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+
+<div class="col-xl-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Nuevo Registro</h4>
+        </div>
+        <div class="card-body">
+            <div class="basic-form">
+                <?= $this->Form->create($usuario) ?>
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Rol</label>
+                            <select id="inputState" name="grupo_id" class="default-select form-control wide">
+                                <option selected>Ninguno...</option>
+                                <?php foreach($grupos as $grupo){ ?>
+                                    <option value="<?= $grupo->id ?>" ><?= $grupo->nombre ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Nombre(s)</label>
+                            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Apellido(s)</label>
+                            <input type="text"  id="apellido" name="apellido" class="form-control" placeholder="">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Correo</label>
+                            <input type="email" id="correo" name="correo" class="form-control" placeholder="">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Usuario</label>
+                            <input type="text" id="usuario" name="usuario"class="form-control" placeholder="">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Contraseña</label>
+                            <input type="password" id="password" name="password"class="form-control" placeholder="">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check custom-checkbox">
+                            <input type="hidden" id="actives"  name="activo" value="1">
+							<input type="checkbox" class="form-check-input" checked='checked'  onclick="setActive();" id="customCheckBox1" >
+							<label class="form-check-label" for="customCheckBox1">Activo</label>
+						</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                <?= $this->Form->end() ?>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+
+    var active_switch = true;
+
+    function setActive(){
+        if(active_switch){
+            active_switch = false;
+            $('#actives').val("0");
+        } else{
+            active_switch = true;
+            $('#actives').val("1");
+        }
+    }
+
+</script>
+

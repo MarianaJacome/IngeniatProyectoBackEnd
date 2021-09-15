@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="mb-3 col-md-12">
-                        <!-- <label class="form-label">Roles</label> -->
+                        <label class="form-label">Roles</label>
                         <select class="multi-select" name="grupos[_ids][]" multiple="multiple">
                             <?php foreach($grupos as $grupo){ ?>
                                 <option value="<?= $grupo->id ?>"><?= $grupo->nombre ?></option>
@@ -53,7 +53,7 @@
                     <div class="mb-3">
                         <div class="form-check custom-checkbox">
                             <input type="hidden" id="actives"  name="activo" value="1">
-							<input type="checkbox" class="form-check-input"  onclick="setActive();" id="customCheckBox1" >
+							<input type="checkbox" class="form-check-input" checked='checked'  onclick="setActive();" id="customCheckBox1" >
 							<label class="form-check-label" for="customCheckBox1">Activo</label>
 						</div>
                     </div>

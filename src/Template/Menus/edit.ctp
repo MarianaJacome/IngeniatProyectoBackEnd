@@ -83,7 +83,7 @@
 							<label class="form-check-label" for="customCheckBox1">Activo</label>
 						</div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Agregar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
                 <?= $this->Form->end() ?>
             </div>
         </div>

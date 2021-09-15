@@ -102,7 +102,7 @@ class MenusController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $menu = $this->Menus->get($id);
-        $coMenu->activo = 0;
+        $menu->activo = 0;
         if ($this->Menus->save($menu)) {
             $this->Flash->success(__('El Menú ha sido eliminado con éxito.'));
         } else {

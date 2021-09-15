@@ -23,7 +23,7 @@
 	<?= $this->Html->css('/vendor/owl-carousel/owl.carousel.css') ?>
     <?= $this->Html->css('/vendor/nouislider/nouislider.min.css') ?>
 	<?= $this->Html->css('/vendor/select2/css/select2.min.css') ?>
-	
+	<?= $this->Html->script('jquery-3.6.0.min.js') ?>
 
 	<!-- Style css -->
     <?= $this->Html->css('style.css') ?>
@@ -588,7 +588,7 @@
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
 							<div class="dashboard_bar">
-                                Dashboard
+                                
                             </div>
                         </div>
                         <ul class="navbar-nav header-right">

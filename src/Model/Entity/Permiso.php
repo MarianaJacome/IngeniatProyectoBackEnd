@@ -30,7 +30,7 @@ class Permiso extends Entity
      */
     protected $_accessible = [
         'nombre' => true,
-        'descripción' => true,
+        'descripcion' => true,
         'controller' => true,
         'action' => true,
         'activo' => true,

@@ -86,16 +86,6 @@ class GruposTable extends Table
             ->allowEmptyString('pagina');
 
         $validator
-            ->scalar('icon')
-            ->maxLength('icon', 100)
-            ->allowEmptyString('icon');
-
-        $validator
-            ->scalar('color_icon')
-            ->maxLength('color_icon', 100)
-            ->allowEmptyString('color_icon');
-
-        $validator
             ->boolean('activo')
             ->notEmptyString('activo');
 

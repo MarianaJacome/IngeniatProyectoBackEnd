@@ -60,7 +60,8 @@ class UsuariosController extends AppController
             }
             $this->Flash->error(__('The usuario could not be saved. Please, try again.'));
         }
-        $grupos = $this->Usuarios->Grupos->find('list', ['limit' => 200]);
+       
+        $grupos = $this->Usuarios->Grupos->find('all', ['conditions'=>['activo'=>1]]);
         $this->set(compact('usuario', 'grupos'));
     }
 
@@ -85,7 +86,7 @@ class UsuariosController extends AppController
             }
             $this->Flash->error(__('The usuario could not be saved. Please, try again.'));
         }
-        $grupos = $this->Usuarios->Grupos->find('list', ['limit' => 200]);
+        $grupos = $this->Usuarios->Grupos->find('all', ['conditions'=>['activo'=>1]]);
         $this->set(compact('usuario', 'grupos'));
     }
 
@@ -137,6 +138,7 @@ class UsuariosController extends AppController
     {
         $id = $this->request->getSession()->read('Auth.User.id');
         $usuario = $this->Usuarios->get($id);
+        $usuario->activo = 0;
         if($this->Usuarios->save($usuario)){
             return $this->response->withType("application/json")->withStringBody(json_encode(1));
         } else{

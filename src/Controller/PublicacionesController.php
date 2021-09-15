@@ -22,11 +22,32 @@ class PublicacionesController extends AppController
         $this->paginate = [
             'contain' => ['Usuarios', 'CatEstatus'],
         ];
-        $publicaciones = $this->paginate($this->Publicaciones);
+        $publicacione = $this->paginate($this->Publicaciones);
 
-        $this->set(compact('publicaciones'));
+        $this->set(compact('publicacione'));
     }
 
+    public function publicacion(){
+        $this->viewBuilder()->setLayout("ajax");
+        $publicacione = $this->Publicaciones->newEntity();
+        $publicacione->usuario_id = $this->request->getSession()->read('Auth.User.id');
+        $publicacione->cat_estatu_id = '10714ce4-816d-4df3-8417-282d1e3565dc';
+        if ($this->request->is('post')) {
+            $publicacione = $this->Publicaciones->patchEntity($publicacione, $this->request->getData());
+            if ($this->Publicaciones->save($publicacione)) {
+                return $this->response->withType("application/json")->withStringBody(json_encode(1));
+            }
+        }
+        return $this->response->withType("application/json")->withStringBody(json_encode(0));
+    }
+
+    public function getPublicacion(){
+        
+        $this->viewBuilder()->setLayout("ajax");
+        $publicaciones = $this->Publicaciones->find('all',['condition' => [ 'activo' => 1]]);
+        return $this->response->withType("application/json")->withStringBody(json_encode($publicaciones));
+
+    }
     /**
      * View method
      *

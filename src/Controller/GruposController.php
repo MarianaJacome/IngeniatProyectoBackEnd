@@ -57,8 +57,8 @@ class GruposController extends AppController
             }
             $this->Flash->error(__('The grupo could not be saved. Please, try again.'));
         }
-        $menus = $this->Grupos->Menus->find('list', ['limit' => 200]);
-        $permisos = $this->Grupos->Permisos->find('list', ['limit' => 200]);
+        $menus = $this->Grupos->Menus->find('all', ['conditions'=>['activo'=>1]]);
+        $permisos = $this->Grupos->Permisos->find('all', ['conditions'=>['activo'=>1]]);
         $this->set(compact('grupo', 'menus', 'permisos'));
     }
 
@@ -83,8 +83,8 @@ class GruposController extends AppController
             }
             $this->Flash->error(__('The grupo could not be saved. Please, try again.'));
         }
-        $menus = $this->Grupos->Menus->find('list', ['limit' => 200]);
-        $permisos = $this->Grupos->Permisos->find('list', ['limit' => 200]);
+        $menus = $this->Grupos->Menus->find('all', ['conditions'=>['activo'=>1]]);
+        $permisos = $this->Grupos->Permisos->find('all', ['conditions'=>['activo'=>1]]);
         $this->set(compact('grupo', 'menus', 'permisos'));
     }
 
@@ -99,7 +99,8 @@ class GruposController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $grupo = $this->Grupos->get($id);
-        if ($this->Grupos->delete($grupo)) {
+        $grupo->activo = 0;
+        if ($this->Grupos->save($grupo)) {
             $this->Flash->success(__('The grupo has been deleted.'));
         } else {
             $this->Flash->error(__('The grupo could not be deleted. Please, try again.'));

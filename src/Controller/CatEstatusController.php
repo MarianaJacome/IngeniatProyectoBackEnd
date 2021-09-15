@@ -95,7 +95,8 @@ class CatEstatusController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $catEstatus = $this->CatEstatus->get($id);
-        if ($this->CatEstatus->delete($catEstatus)) {
+        $catEstatus->activo = 0;
+        if ($this->CatEstatus->save($catEstatus)) {
             $this->Flash->success(__('The cat estatus has been deleted.'));
         } else {
             $this->Flash->error(__('The cat estatus could not be deleted. Please, try again.'));

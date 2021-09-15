@@ -4,62 +4,69 @@
  * @var \App\Model\Entity\Usuario[]|\Cake\Collection\CollectionInterface $usuarios
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Usuario'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Grupos'), ['controller' => 'Grupos', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Grupo'), ['controller' => 'Grupos', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Publicaciones'), ['controller' => 'Publicaciones', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Publicacione'), ['controller' => 'Publicaciones', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="usuarios index large-9 medium-8 columns content">
-    <h3><?= __('Usuarios') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('grupo_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('nombre') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('apellido') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('usuario') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('password') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('activo') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($usuarios as $usuario): ?>
-            <tr>
-                <td><?= h($usuario->id) ?></td>
-                <td><?= $usuario->has('grupo') ? $this->Html->link($usuario->grupo->id, ['controller' => 'Grupos', 'action' => 'view', $usuario->grupo->id]) : '' ?></td>
-                <td><?= h($usuario->nombre) ?></td>
-                <td><?= h($usuario->apellido) ?></td>
-                <td><?= h($usuario->usuario) ?></td>
-                <td><?= h($usuario->password) ?></td>
-                <td><?= h($usuario->activo) ?></td>
-                <td><?= h($usuario->created) ?></td>
-                <td><?= h($usuario->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $usuario->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $usuario->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $usuario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $usuario->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+
+<div class="row page-titles">
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active"><a href="javascript:void(0)">Tabla</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Usuarios</a></li>
+</ol>
+</div>
+<!-- row -->
+
+<div class="row">
+<div class="col-lg-12">
+    <div class="card">
+        
+            
+            <div style="float:right; margin:20px;">
+            <?= $this->Html->link('<button type="button" class="btn btn-rounded btn-primary"  ><span class="btn-icon-start text-primary"><i class="fa fa-plus color-info"></i></span>Nuevo usuario</button> ', ['action' => 'add'] ,['escape'=>false]) ?>
+            </div>
+ <!-- <br>
+ <br>
+ <br>
+ <br> -->
+        
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-responsive-md">
+                    <thead>
+                        <tr>
+                            <th scope="col"><?= $this->Paginator->sort('Rol') ?></th>
+                            <th scope="col"><?= $this->Paginator->sort('Nombre') ?></th>
+                            <th scope="col"><?= $this->Paginator->sort('Usuario') ?></th>
+                            <th scope="col"><?= $this->Paginator->sort('Activo') ?></th>
+                            <th scope="col"><?= $this->Paginator->sort('Creacion') ?></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($usuarios as $usuario): ?>
+                            <tr>
+                            
+                                <td><?= $usuario->grupo->nombre ?></td>
+                                <td><?= h($usuario->nombre) ?> <?= h($usuario->apellido) ?> </td>
+                                <td><?= h($usuario->usuario) ?></td>
+                                
+                                <td><?= $usuario->activo == 1 ? '<span class="badge light badge-success"> Activo' : '<span class="badge light badge-danger"> Inactivo' ?></td>
+                                <td><?= h($usuario->created) ?></td>
+                                <td class="actions">
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-success light sharp" data-bs-toggle="dropdown">
+                                            <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <!-- < ?= $this->Html->link(__('View'), ['action' => 'view', $menu->id]) ?> -->
+                                            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $usuario->id] ,['class'=>'dropdown-item']) ?>
+                                            <?= $this->Html->link(__('Eliminar'), ['action' => 'delete', $usuario->id] , ['class'=>'dropdown-item'], ['confirm' => __('Are you sure you want to delete # {0}?', $usuario->id)]) ?>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

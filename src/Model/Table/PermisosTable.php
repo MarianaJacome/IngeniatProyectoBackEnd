@@ -66,9 +66,9 @@ class PermisosTable extends Table
             ->notEmptyString('nombre');
 
         $validator
-            ->scalar('descripción')
-            ->requirePresence('descripción', 'create')
-            ->notEmptyString('descripción');
+            ->scalar('descripcion')
+            ->requirePresence('descripcion', 'create')
+            ->notEmptyString('descripcion');
 
         $validator
             ->scalar('controller')

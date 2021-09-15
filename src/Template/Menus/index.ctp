@@ -16,9 +16,9 @@
 <div class="row">
 <div class="col-lg-12">
     <div class="card">
-        <div class="card-header">
-            <h4 class="card-title">Recent Payments Queue</h4>
-        </div>
+        <div style="float:right; margin:20px;">
+            <?= $this->Html->link('<button type="button" class="btn btn-rounded btn-primary"  ><span class="btn-icon-start text-primary"><i class="fa fa-plus color-info"></i></span>Nuevo menú</button> ', ['action' => 'add'] ,['escape'=>false]) ?>
+            </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-responsive-md">
@@ -39,7 +39,8 @@
                                 <td><?= $menu->menu_padre==null?'':$menu->menu_padre->nombre ?></td>
                                 <td><?= h($menu->nombre) ?></td>
                                 <td><?= h($menu->href) ?></td>
-                                <td><span class="badge light badge-success"><?= h($menu->activo) ?></span></td>
+                                
+                                <td><?= $menu->activo == 1 ? '<span class="badge light badge-success"> Activo' : '<span class="badge light badge-danger"> Inactivo' ?></td>
                                 <td><?= h($menu->created) ?></td>
                                 <td class="actions">
                                     <div class="dropdown">

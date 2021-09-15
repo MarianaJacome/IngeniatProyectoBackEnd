@@ -74,10 +74,6 @@ class PublicacionesTable extends Table
             ->requirePresence('descripcion', 'create')
             ->notEmptyString('descripcion');
 
-        $validator
-            ->scalar('imagen')
-            ->requirePresence('imagen', 'create')
-            ->notEmptyFile('imagen');
 
         return $validator;
     }

@@ -35,8 +35,6 @@ class Grupo extends Entity
         'nombre' => true,
         'descripcion' => true,
         'pagina' => true,
-        'icon' => true,
-        'color_icon' => true,
         'activo' => true,
         'created' => true,
         'modified' => true,
