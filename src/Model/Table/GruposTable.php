@@ -37,7 +37,7 @@ class GruposTable extends Table
         parent::initialize($config);
 
         $this->setTable('grupos');
-        $this->setDisplayField('id');
+        $this->setDisplayField('nombre');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');

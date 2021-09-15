@@ -36,6 +36,8 @@ class PublicacionesTable extends Table
         parent::initialize($config);
 
         $this->setTable('publicaciones');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 
@@ -59,8 +61,7 @@ class PublicacionesTable extends Table
     {
         $validator
             ->uuid('id')
-            ->requirePresence('id', 'create')
-            ->notEmptyString('id');
+            ->allowEmptyString('id', null, 'create');
 
         $validator
             ->scalar('titulo')
@@ -72,6 +73,11 @@ class PublicacionesTable extends Table
             ->scalar('descripcion')
             ->requirePresence('descripcion', 'create')
             ->notEmptyString('descripcion');
+
+        $validator
+            ->scalar('imagen')
+            ->requirePresence('imagen', 'create')
+            ->notEmptyFile('imagen');
 
         return $validator;
     }

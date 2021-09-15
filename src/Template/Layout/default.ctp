@@ -825,7 +825,7 @@
                                     {
                                         ?>
                                         <li>
-                                            <a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                                            <a class="has-arrow " href="javascript:void()" aria-expanded="false" >
                                                 <i class=" <?= $Menu->icon ?>"></i>
                                                 <span class="nav-text" data-i18n="<?= $Menu->nombre ?>"><?= $Menu->nombre ?></span>
                                             </a>
@@ -834,8 +834,8 @@
                                                     foreach($Menu->children_menus as $submenu)
                                                     {
                                                         ?>
-                                                            <li class="<?= "/" . $this->request->getParam('controller') . "/" .  $this->request->getParam('action')  == $submenu->href ? "mm-active" : "/" .  $this->request->getParam('controller') . "/" .  $this->request->getParam('action') . "/"  == $submenu->href  ? "mm-active"  : ""  ?>">
-                                                                <?= $this->Html->link($submenu->nombre,$submenu->href,['escape'=>false]) ?>
+                                                            <li>
+                                                                <?php echo $this->Html->link($submenu->nombre,$submenu->href,['escape'=>false, 'class'=>"/" . $this->request->getParam('controller') . "/" .  $this->request->getParam('action')  == $submenu->href ? "mm-active" : "/" .  $this->request->getParam('controller') . "/" .  $this->request->getParam('action') . "/"  == $submenu->href  ? "mm-active"  : ""]); ?>
                                                             </li>
                                                         <?php
                                                     }

@@ -58,7 +58,8 @@ class MenusController extends AppController
             $this->Flash->error(__('The menu could not be saved. Please, try again.'));
         }
         $grupos = $this->Menus->Grupos->find('list', ['limit' => 200]);
-        $this->set(compact('menu', 'grupos'));
+        $menus = $this->Menus->find('list', ['limit' => 200]);
+        $this->set(compact('menu', 'grupos', 'menus'));
     }
 
     /**
@@ -83,7 +84,8 @@ class MenusController extends AppController
             $this->Flash->error(__('The menu could not be saved. Please, try again.'));
         }
         $grupos = $this->Menus->Grupos->find('list', ['limit' => 200]);
-        $this->set(compact('menu', 'grupos'));
+        $menus = $this->Menus->find('list', ['limit' => 200]);
+        $this->set(compact('menu', 'grupos', 'menus'));
     }
 
     /**

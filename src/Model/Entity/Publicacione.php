@@ -11,6 +11,7 @@ use Cake\ORM\Entity;
  * @property string $cat_estatu_id
  * @property string $titulo
  * @property string $descripcion
+ * @property string $imagen
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
@@ -29,11 +30,11 @@ class Publicacione extends Entity
      * @var array
      */
     protected $_accessible = [
-        'id' => true,
         'usuario_id' => true,
         'cat_estatu_id' => true,
         'titulo' => true,
         'descripcion' => true,
+        'imagen' => true,
         'created' => true,
         'modified' => true,
         'usuario' => true,

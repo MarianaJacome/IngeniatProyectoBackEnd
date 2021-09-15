@@ -25,7 +25,7 @@
     <fieldset>
         <legend><?= __('Edit Menu') ?></legend>
         <?php
-            echo $this->Form->control('menu_id');
+            echo $this->Form->control('menu_id', ['options' => $menus, 'empty'=> true]);
             echo $this->Form->control('icon');
             echo $this->Form->control('nombre');
             echo $this->Form->control('href');
