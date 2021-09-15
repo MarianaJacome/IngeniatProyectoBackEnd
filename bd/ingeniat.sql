@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-09-2021 a las 23:40:33
+-- Tiempo de generación: 15-09-2021 a las 04:52:10
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.4.23
 
@@ -78,7 +78,13 @@ CREATE TABLE `grupos_menus` (
 --
 
 INSERT INTO `grupos_menus` (`id`, `grupo_id`, `menu_id`) VALUES
-('4cdfeff3-7a01-4527-95e6-ec62fc67f22f', '8c42ea1d-1598-11ec-843f-9cb6d01e9372', '356c270a-7e01-422a-ad4f-95652f79588a');
+('4685b227-47d1-4e0c-826d-b8d078d2fdc6', '8c42ea1d-1598-11ec-843f-9cb6d01e9372', '894b9b4e-9699-4413-af59-d2fc611e0b43'),
+('4cdfeff3-7a01-4527-95e6-ec62fc67f22f', '8c42ea1d-1598-11ec-843f-9cb6d01e9372', '356c270a-7e01-422a-ad4f-95652f79588a'),
+('aa7f19cf-84a3-4b88-93b5-c1853a07c31e', '8c42ea1d-1598-11ec-843f-9cb6d01e9372', '216d99a6-4cad-4cf9-ac50-3fca7d8ecb76'),
+('b93adddb-e8e7-4b87-a35d-e9b76cabc05c', '8c42ea1d-1598-11ec-843f-9cb6d01e9372', 'e6dc709c-e544-4244-b467-b16779028fb6'),
+('c4041c45-e56a-4680-bee0-3b0227886d86', '8c42ea1d-1598-11ec-843f-9cb6d01e9372', '02241d10-b424-4041-a68b-3334150d63cb'),
+('fca8f7e6-f384-44e0-8c32-177bfac4be82', '8c42ea1d-1598-11ec-843f-9cb6d01e9372', '8ab9ebc6-9acd-48f4-8354-d2be0c11bb0b'),
+('fdae42bd-8857-4bd8-85cf-ee35eb15b03f', '8c42ea1d-1598-11ec-843f-9cb6d01e9372', 'f11f293a-1c97-4f45-8755-5b005f604829');
 
 -- --------------------------------------------------------
 
@@ -122,7 +128,13 @@ CREATE TABLE `menus` (
 --
 
 INSERT INTO `menus` (`id`, `menu_id`, `icon`, `nombre`, `href`, `position`, `activo`, `created`, `modified`) VALUES
-('356c270a-7e01-422a-ad4f-95652f79588a', NULL, 'fas fa-tachometer-alt', 'Dashboard', '/Dashboard/index', 1, 1, '2021-09-14 16:28:44', '2021-09-14 16:28:44');
+('02241d10-b424-4041-a68b-3334150d63cb', '8ab9ebc6-9acd-48f4-8354-d2be0c11bb0b', '', 'Permisos', '/permisos/index', 4, 1, '2021-09-14 19:26:58', '2021-09-14 19:28:52'),
+('216d99a6-4cad-4cf9-ac50-3fca7d8ecb76', '8ab9ebc6-9acd-48f4-8354-d2be0c11bb0b', '', 'Roles', '/grupos/index', 3, 1, '2021-09-14 19:26:21', '2021-09-14 19:26:21'),
+('356c270a-7e01-422a-ad4f-95652f79588a', NULL, 'fas fa-tachometer-alt', 'Dashboard', '/Dashboard/index', 1, 1, '2021-09-14 16:28:44', '2021-09-14 16:28:44'),
+('894b9b4e-9699-4413-af59-d2fc611e0b43', '8ab9ebc6-9acd-48f4-8354-d2be0c11bb0b', 'fas fa-users', 'Usuarios', '/usuarios/index', 2, 1, '2021-09-14 19:21:44', '2021-09-14 19:21:44'),
+('8ab9ebc6-9acd-48f4-8354-d2be0c11bb0b', NULL, 'fas fa-cogs', 'Administrar', '#', 3, 1, '2021-09-14 19:13:49', '2021-09-14 19:33:16'),
+('e6dc709c-e544-4244-b467-b16779028fb6', '8ab9ebc6-9acd-48f4-8354-d2be0c11bb0b', 'fas fa-cogs', 'Menus', '/menus/index', 1, 1, '2021-09-14 19:20:28', '2021-09-14 19:22:41'),
+('f11f293a-1c97-4f45-8755-5b005f604829', NULL, 'fas fa-newspaper', 'Publicaciones', '/publicaciones/index', 2, 1, '2021-09-14 19:32:33', '2021-09-14 19:32:33');
 
 -- --------------------------------------------------------
 
@@ -240,6 +252,7 @@ ALTER TABLE `permisos`
 -- Indices de la tabla `publicaciones`
 --
 ALTER TABLE `publicaciones`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `usuario_id` (`usuario_id`),
   ADD KEY `cat_estatu_id` (`cat_estatu_id`);
 
