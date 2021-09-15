@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-09-2021 a las 04:52:10
+-- Tiempo de generación: 15-09-2021 a las 10:20:43
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.4.23
 
@@ -35,6 +35,15 @@ CREATE TABLE `cat_estatus` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `cat_estatus`
+--
+
+INSERT INTO `cat_estatus` (`id`, `nombre`, `descripcion`, `activo`, `created`, `modified`) VALUES
+('10714ce4-816d-4df3-8417-282d1e3565dc', 'Publicada', 'Notas publicadas', 1, '2021-09-15 00:54:12', '2021-09-15 00:54:12'),
+('45ef8408-4080-49c6-84d9-896c3de8400d', 'Papelera', 'Cuando la publicación se descarta.', 1, '2021-09-15 00:56:16', '2021-09-15 00:56:16'),
+('d1ef0720-61c0-4608-b65b-9b04892f40a6', 'Eliminada', 'cuando la publicación se a eliminado', 1, '2021-09-15 00:54:48', '2021-09-15 00:56:36');
 
 -- --------------------------------------------------------
 
@@ -128,7 +137,7 @@ CREATE TABLE `menus` (
 --
 
 INSERT INTO `menus` (`id`, `menu_id`, `icon`, `nombre`, `href`, `position`, `activo`, `created`, `modified`) VALUES
-('02241d10-b424-4041-a68b-3334150d63cb', '8ab9ebc6-9acd-48f4-8354-d2be0c11bb0b', '', 'Permisos', '/permisos/index', 4, 1, '2021-09-14 19:26:58', '2021-09-14 19:28:52'),
+('02241d10-b424-4041-a68b-3334150d63cb', '8ab9ebc6-9acd-48f4-8354-d2be0c11bb0b', '', 'Permisos', '/permisos/index', 4, 1, '2021-09-14 19:26:58', '2021-09-15 03:17:19'),
 ('216d99a6-4cad-4cf9-ac50-3fca7d8ecb76', '8ab9ebc6-9acd-48f4-8354-d2be0c11bb0b', '', 'Roles', '/grupos/index', 3, 1, '2021-09-14 19:26:21', '2021-09-14 19:26:21'),
 ('356c270a-7e01-422a-ad4f-95652f79588a', NULL, 'fas fa-tachometer-alt', 'Dashboard', '/Dashboard/index', 1, 1, '2021-09-14 16:28:44', '2021-09-14 16:28:44'),
 ('894b9b4e-9699-4413-af59-d2fc611e0b43', '8ab9ebc6-9acd-48f4-8354-d2be0c11bb0b', 'fas fa-users', 'Usuarios', '/usuarios/index', 2, 1, '2021-09-14 19:21:44', '2021-09-14 19:21:44'),

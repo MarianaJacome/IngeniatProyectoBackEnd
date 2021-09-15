@@ -57,6 +57,10 @@ class MenusTable extends Table
             'className'=>'Menus',
             'foreignKey' => 'menu_id'
         ]);
+        $this->belongsTo('MenuPadre', [
+            'className'=>'Menus',
+            'foreignKey' => 'menu_id'
+        ]);
     }
 
     /**
@@ -107,7 +111,7 @@ class MenusTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['menu_id'], 'Menus'));
+        // $rules->add($rules->existsIn(['menu_id'], 'Menus'));
 
         return $rules;
     }

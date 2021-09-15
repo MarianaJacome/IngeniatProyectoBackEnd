@@ -22,6 +22,9 @@
 	<?= $this->Html->css('/vendor/jquery-nice-select/css/nice-select.css') ?>
 	<?= $this->Html->css('/vendor/owl-carousel/owl.carousel.css') ?>
     <?= $this->Html->css('/vendor/nouislider/nouislider.min.css') ?>
+	<?= $this->Html->css('/vendor/select2/css/select2.min.css') ?>
+	
+
 	<!-- Style css -->
     <?= $this->Html->css('style.css') ?>
 	
@@ -915,14 +918,17 @@
     ***********************************-->
     <!-- Required vendors -->
     <?= $this->Html->script('/vendor/global/global.min.js') ?>
-    <?= $this->Html->script('/vendor/chart.js/Chart.bundle.min.js') ?>
     <?= $this->Html->script('/vendor/jquery-nice-select/js/jquery.nice-select.min.js') ?>
-	
+	<?= $this->Html->script('/vendor/chart.js/Chart.bundle.min.js') ?>
+
 	<!-- Apex Chart -->
-    <?= $this->Html->script('/vendor/apexchart/apexchart.js') ?>
-	
-    <?= $this->Html->script('/vendor/chart.js/Chart.bundle.min.js') ?>
-	
+	<?= $this->Html->script('/vendor/select2/js/select2.full.min.js') ?>
+	<?= $this->Html->script('plugins-init/select2-init.js') ?>
+	<?= $this->Html->script('custom.min.js') ?>
+	<?= $this->Html->script('dlabnav-init.js') ?>
+	<?= $this->Html->script('demo.js') ?>
+	<?= $this->Html->script('styleSwitcher.js') ?>
+    
 	<!-- Chart piety plugin files -->
     <?= $this->Html->script('/vendor/peity/jquery.peity.min.js') ?>
     <?= $this->Html->script('/vendor/nouislider/nouislider.min.js') ?>
@@ -934,11 +940,19 @@
 	
     <?= $this->Html->script('/vendor/owl-carousel/owl.carousel.js') ?>
 	
-	<?= $this->Html->script('custom.min.js') ?>
-    <?= $this->Html->script('dlabnav-init.js') ?>
-    <?= $this->Html->script('demo.js') ?>
-    <?= $this->Html->script('styleSwitcher.js') ?>
-
+	<?= $this->Html->script('/vendor/apexchart/apexchart.js') ?>
+    <?= $this->Html->script('/vendor/chart.js/Chart.bundle.min.js') ?>
+    
+    
+	
+	
+	
+    
+    
+    
+	
+	
+    
 
 </body>
 </html>

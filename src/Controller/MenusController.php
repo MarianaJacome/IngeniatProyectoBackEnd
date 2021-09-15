@@ -19,6 +19,9 @@ class MenusController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => [ 'MenuPadre'],
+        ];
         $menus = $this->paginate($this->Menus);
 
         $this->set(compact('menus'));
@@ -57,8 +60,8 @@ class MenusController extends AppController
             }
             $this->Flash->error(__('The menu could not be saved. Please, try again.'));
         }
-        $grupos = $this->Menus->Grupos->find('list', ['limit' => 200]);
-        $menus = $this->Menus->find('list', ['limit' => 200]);
+        $grupos = $this->Menus->Grupos->find('all', ['conditions'=>['activo'=>1]]);
+        $menus = $this->Menus->find('all', ['conditions'=>['activo'=>1,'menu_id is null']]);
         $this->set(compact('menu', 'grupos', 'menus'));
     }
 
@@ -83,8 +86,8 @@ class MenusController extends AppController
             }
             $this->Flash->error(__('The menu could not be saved. Please, try again.'));
         }
-        $grupos = $this->Menus->Grupos->find('list', ['limit' => 200]);
-        $menus = $this->Menus->find('list', ['limit' => 200]);
+        $grupos = $this->Menus->Grupos->find('all', ['conditions'=>['activo'=>1]]);
+        $menus = $this->Menus->find('all', ['conditions'=>['activo'=>1,'menu_id is null']]);
         $this->set(compact('menu', 'grupos', 'menus'));
     }
 
@@ -99,10 +102,11 @@ class MenusController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $menu = $this->Menus->get($id);
-        if ($this->Menus->delete($menu)) {
-            $this->Flash->success(__('The menu has been deleted.'));
+        $coMenu->activo = 0;
+        if ($this->Menus->save($menu)) {
+            $this->Flash->success(__('El Menú ha sido eliminado con éxito.'));
         } else {
-            $this->Flash->error(__('The menu could not be deleted. Please, try again.'));
+            $this->Flash->error(__('El Menú no se pudo eliminar. Porfavor, intente de nuevo.'));
         }
 
         return $this->redirect(['action' => 'index']);

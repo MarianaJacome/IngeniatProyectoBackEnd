@@ -93,6 +93,7 @@ class AppController extends Controller
         $userData["nombre"] =  $this->request->getSession()->read('Auth.User.nombre');
         $userData["apellido"] =  $this->request->getSession()->read('Auth.User.apellido');
         $userData["usuario"] =  $this->request->getSession()->read('Auth.User.usuario');
+        $userData["correo"] =  $this->request->getSession()->read('Auth.User.correo');
         $userData["rol"] =  $this->request->getSession()->read('Auth.User.grupo.nombre');
         $userData["id"] =  $this->request->getSession()->read('Auth.User.id');
         $userData["imagen"] = false;

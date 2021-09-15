@@ -4,83 +4,78 @@
  * @var \App\Model\Entity\Menu $menu
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Menus'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Menus'), ['controller' => 'Menus', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Menu'), ['controller' => 'Menus', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Grupos'), ['controller' => 'Grupos', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Grupo'), ['controller' => 'Grupos', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="menus form large-9 medium-8 columns content">
-    <?= $this->Form->create($menu) ?>
-    <fieldset>
-        <legend><?= __('Add Menu') ?></legend>
-        <?php
-            echo $this->Form->control('menu_id', ['options' => $menus, 'empty'=> true]);
-            echo $this->Form->control('icon');
-            echo $this->Form->control('nombre');
-            echo $this->Form->control('href');
-            echo $this->Form->control('position');
-            echo $this->Form->control('activo');
-            echo $this->Form->control('grupos._ids', ['options' => $grupos]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
-
 <div class="col-xl-12 col-lg-12">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Nuevo menú</h4>
+            <h4 class="card-title">Nuevo Registro</h4>
         </div>
         <div class="card-body">
             <div class="basic-form">
-                <form>
+                <?= $this->Form->create($menu) ?>
                     <div class="row">
                         <div class="mb-3 col-md-12">
                             <label class="form-label">Menu</label>
-                            <select id="inputState" class="default-select form-control wide">
-                                <option selected>Choose...</option>
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>
+                            <select id="inputState" name="menu_id" class="default-select form-control wide">
+                                <option selected>Ninguno...</option>
+                                <?php foreach($menus as $menu){ ?>
+                                    <option value="<?= $menu->id ?>" ><?= $menu->nombre ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Nombre del menú</label>
-                            <input type="text" class="form-control" placeholder="Nombre del menú">
+                            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="">
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">icono</label>
-                            <input type="text" class="form-control" placeholder="fas fa-users">
+                            <input type="text"  id="icon" name="icon" class="form-control" placeholder="fas fa-users">
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Href</label>
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" id="href" name="href" class="form-control" placeholder="">
                         </div>
                         <div class="mb-3 col-md-6">
                         <label class="form-label">Posicion</label>
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" id="position" name="position"class="form-control" placeholder="">
                         </div>
                     </div>
-                    
+                    <div class="mb-3 col-md-12">
+                        <!-- <label class="form-label">Roles</label> -->
+                        <select class="multi-select" name="grupos[_ids][]" multiple="multiple">
+                            <?php foreach($grupos as $grupo){ ?>
+                                <option value="<?= $grupo->id ?>"><?= $grupo->nombre ?></option>
+                            <?php } ?>
+                        </select>
+                                        
+                    </div>
                     <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox">
-                            <label class="form-check-label">
-                                Activo
-                            </label>
-                        </div>
+                        <div class="form-check custom-checkbox">
+                            <input type="hidden" id="actives"  name="activo" value="1">
+							<input type="checkbox" class="form-check-input"  onclick="setActive();" id="customCheckBox1" >
+							<label class="form-check-label" for="customCheckBox1">Activo</label>
+						</div>
                     </div>
                     <button type="submit" class="btn btn-primary">Agregar</button>
-                </form>
+                <?= $this->Form->end() ?>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+
+    var active_switch = true;
+
+    function setActive(){
+        if(active_switch){
+            active_switch = false;
+            $('#actives').val("0");
+        } else{
+            active_switch = true;
+            $('#actives').val("1");
+        }
+    }
+
+</script>
