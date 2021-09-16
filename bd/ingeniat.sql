@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-09-2021 a las 10:49:24
+-- Tiempo de generación: 16-09-2021 a las 11:44:47
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.4.23
 
@@ -67,11 +67,11 @@ CREATE TABLE `grupos` (
 
 INSERT INTO `grupos` (`id`, `nombre`, `descripcion`, `pagina`, `activo`, `created`, `modified`) VALUES
 ('2d7f1c83-80dd-4467-835e-0a490943be6f', 'Basico', 'permiso de acceso', '/', 1, '2021-09-15 23:47:07', '2021-09-15 23:47:07'),
-('779798bd-faa2-4280-a194-a9a4f8338d26', 'Alto', 'Consulta, agregar, actualizar , eliminar', '', 1, '2021-09-16 00:52:30', '2021-09-16 01:18:22'),
+('779798bd-faa2-4280-a194-a9a4f8338d26', 'Alto', 'Consulta, agregar, actualizar , eliminar', '', 1, '2021-09-16 00:52:30', '2021-09-16 04:37:37'),
 ('8c42ea1d-1598-11ec-843f-9cb6d01e9372', 'Administrador', 'Encargado del sistema.', '', 1, '2021-09-14 15:15:47', '2021-09-15 14:37:43'),
-('8ec7dce5-12cb-4bbc-90e1-6503db9910d4', 'Medio Alto', 'Permiso de acceso y agregar', '', 1, '2021-09-16 00:51:18', '2021-09-16 03:24:31'),
-('94819f1d-9ec2-4210-8df8-c14a6851a48f', 'Alto medio', 'Permiso de acceso, consulta , agregar y actualizar', '', 1, '2021-09-16 00:51:55', '2021-09-16 01:17:02'),
-('b7181c04-c9a9-414c-9033-a733786c62b4', 'Medio', 'Permiso de acceso y consulta', '', 1, '2021-09-16 00:50:06', '2021-09-16 01:13:56');
+('8ec7dce5-12cb-4bbc-90e1-6503db9910d4', 'Medio Alto', 'Permiso de acceso y agregar', '', 1, '2021-09-16 00:51:18', '2021-09-16 04:37:50'),
+('94819f1d-9ec2-4210-8df8-c14a6851a48f', 'Alto medio', 'Permiso de acceso, consulta , agregar y actualizar', '', 1, '2021-09-16 00:51:55', '2021-09-16 04:38:05'),
+('b7181c04-c9a9-414c-9033-a733786c62b4', 'Medio', 'Permiso de acceso y consulta', '', 1, '2021-09-16 00:50:06', '2021-09-16 04:38:18');
 
 -- --------------------------------------------------------
 
@@ -95,6 +95,7 @@ INSERT INTO `grupos_menus` (`id`, `grupo_id`, `menu_id`) VALUES
 ('2683a880-e8b8-4b4b-b0a1-da9abb9dbb16', 'b7181c04-c9a9-414c-9033-a733786c62b4', 'f2bf1271-e704-4695-b1c1-227d16837a79'),
 ('2fc56bd9-dee4-454d-9f0c-542e845cac73', '2d7f1c83-80dd-4467-835e-0a490943be6f', '356c270a-7e01-422a-ad4f-95652f79588a'),
 ('406599f5-51ad-44d3-a419-766a495f02d5', '8c42ea1d-1598-11ec-843f-9cb6d01e9372', '68eff1c0-1a75-4ecf-b7e0-8a927e66bf09'),
+('449eb287-1cd6-44f5-8a7f-110723bf96b3', 'b7181c04-c9a9-414c-9033-a733786c62b4', '356c270a-7e01-422a-ad4f-95652f79588a'),
 ('4685b227-47d1-4e0c-826d-b8d078d2fdc6', '8c42ea1d-1598-11ec-843f-9cb6d01e9372', '894b9b4e-9699-4413-af59-d2fc611e0b43'),
 ('4cdfeff3-7a01-4527-95e6-ec62fc67f22f', '8c42ea1d-1598-11ec-843f-9cb6d01e9372', '356c270a-7e01-422a-ad4f-95652f79588a'),
 ('512135f0-9825-4ba4-801b-73c33036645c', 'b7181c04-c9a9-414c-9033-a733786c62b4', 'f11f293a-1c97-4f45-8755-5b005f604829'),
@@ -102,10 +103,13 @@ INSERT INTO `grupos_menus` (`id`, `grupo_id`, `menu_id`) VALUES
 ('652de684-6eec-4cb7-8d3c-8d86617ca5c3', '8ec7dce5-12cb-4bbc-90e1-6503db9910d4', 'f11f293a-1c97-4f45-8755-5b005f604829'),
 ('707d3c42-f50a-4835-8077-42bb3c1bf587', '8c42ea1d-1598-11ec-843f-9cb6d01e9372', '02241d10-b424-4041-a68b-3334150d63cb'),
 ('76b407a5-4ddb-4ff9-9c38-8ddaa27c86eb', '8c42ea1d-1598-11ec-843f-9cb6d01e9372', 'f2bf1271-e704-4695-b1c1-227d16837a79'),
+('a22dc292-04fd-4d1b-af1d-c3ce5e9bbfed', '8ec7dce5-12cb-4bbc-90e1-6503db9910d4', '356c270a-7e01-422a-ad4f-95652f79588a'),
 ('a7e542be-a583-4510-baa5-ca51be8a7473', '94819f1d-9ec2-4210-8df8-c14a6851a48f', 'f11f293a-1c97-4f45-8755-5b005f604829'),
 ('aa7f19cf-84a3-4b88-93b5-c1853a07c31e', '8c42ea1d-1598-11ec-843f-9cb6d01e9372', '216d99a6-4cad-4cf9-ac50-3fca7d8ecb76'),
 ('b93adddb-e8e7-4b87-a35d-e9b76cabc05c', '8c42ea1d-1598-11ec-843f-9cb6d01e9372', 'e6dc709c-e544-4244-b467-b16779028fb6'),
 ('b9a9bae9-ac5a-445b-8d5a-7a36339ac10b', '8ec7dce5-12cb-4bbc-90e1-6503db9910d4', '68eff1c0-1a75-4ecf-b7e0-8a927e66bf09'),
+('cca27ec2-3219-4575-be2f-5fa2cf91f633', '94819f1d-9ec2-4210-8df8-c14a6851a48f', '356c270a-7e01-422a-ad4f-95652f79588a'),
+('cd38bd6e-35fc-414c-a19a-6f4c9b78b4f9', '779798bd-faa2-4280-a194-a9a4f8338d26', '356c270a-7e01-422a-ad4f-95652f79588a'),
 ('ed047576-f3fb-48fc-8b8c-84040f69cc12', '8c42ea1d-1598-11ec-843f-9cb6d01e9372', 'f11f293a-1c97-4f45-8755-5b005f604829'),
 ('fca8f7e6-f384-44e0-8c32-177bfac4be82', '8c42ea1d-1598-11ec-843f-9cb6d01e9372', '8ab9ebc6-9acd-48f4-8354-d2be0c11bb0b');
 
@@ -228,13 +232,7 @@ CREATE TABLE `publicaciones` (
 --
 
 INSERT INTO `publicaciones` (`id`, `usuario_id`, `cat_estatu_id`, `titulo`, `descripcion`, `imagen`, `created`, `modified`) VALUES
-('60ce9e81-3cf5-4701-8e84-335879954cec', 'fffe7621-1598-11ec-843f-9cb6d01e9372', 'd1ef0720-61c0-4608-b65b-9b04892f40a6', 'otra', 'algo', NULL, '2021-09-16 01:55:26', '2021-09-16 03:03:11'),
-('69b678dd-3904-40ab-b04b-02e1c74253e0', '2f6ca970-4233-4f5d-918b-fa4a3897ac4d', '10714ce4-816d-4df3-8417-282d1e3565dc', 'Mira', 'mira', NULL, '2021-09-15 21:32:18', '2021-09-15 21:32:18'),
-('7449c991-8f6b-4ed0-b237-d9a2bee13a97', 'fffe7621-1598-11ec-843f-9cb6d01e9372', 'd1ef0720-61c0-4608-b65b-9b04892f40a6', 'mariana', 'jacome', NULL, '2021-09-16 01:53:59', '2021-09-16 03:09:56'),
-('8b1d0242-3e7e-4254-b287-0e543c83207b', '2f6ca970-4233-4f5d-918b-fa4a3897ac4d', '10714ce4-816d-4df3-8417-282d1e3565dc', 'Noticia', 'Viva Mexico', NULL, '2021-09-15 21:28:07', '2021-09-15 21:28:07'),
-('93a55093-cb30-4068-b712-0b78ba453135', 'fffe7621-1598-11ec-843f-9cb6d01e9372', '10714ce4-816d-4df3-8417-282d1e3565dc', 'prueba', 'prueba', NULL, '2021-09-15 16:58:04', '2021-09-15 16:58:04'),
-('a1170fae-4129-48ba-946b-ca32185e663b', '75f685bb-6656-41d4-8a9c-072fa80119fe', '10714ce4-816d-4df3-8417-282d1e3565dc', 'prueba', 'medioalto', NULL, '2021-09-16 03:25:03', '2021-09-16 03:25:03'),
-('b9ce5410-eed4-41ff-ad43-e44edfddb890', 'fffe7621-1598-11ec-843f-9cb6d01e9372', '10714ce4-816d-4df3-8417-282d1e3565dc', 'hola', 'mundo', NULL, '2021-09-15 21:57:38', '2021-09-15 21:57:38');
+('8b1d0242-3e7e-4254-b287-0e543c83207b', '2f6ca970-4233-4f5d-918b-fa4a3897ac4d', '10714ce4-816d-4df3-8417-282d1e3565dc', 'Noticia', 'Viva Mexico', NULL, '2021-09-15 21:28:07', '2021-09-15 21:28:07');
 
 -- --------------------------------------------------------
 

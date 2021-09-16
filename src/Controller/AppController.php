@@ -88,6 +88,7 @@ class AppController extends Controller
     }
 
     public function getUserData(){
+        
         $userData = [];
         $userData["nombrecompleto"] = $this->request->getSession()->read('Auth.User.nombre') . " " . $this->request->getSession()->read('Auth.User.apellido');
         $userData["nombre"] =  $this->request->getSession()->read('Auth.User.nombre');
@@ -97,6 +98,7 @@ class AppController extends Controller
         $userData["rol"] =  $this->request->getSession()->read('Auth.User.grupo.nombre');
         $userData["id"] =  $this->request->getSession()->read('Auth.User.id');
         $userData["imagen"] = false;
+        $userData["rolid"] =  $this->request->getSession()->read('Auth.User.grupo_id');
         // Verify if the user has an pic profile
         if( is_file( WWW_ROOT . 'files' . DS . 'userfiles' . DS .  $userData["id"] . DS . 'picture' . DS . 'pic.jpg') ){
             $userData["imagen"] = true;

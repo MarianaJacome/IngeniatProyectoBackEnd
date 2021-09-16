@@ -54,11 +54,13 @@
                             <div id="my-posts" class="tab-pane fade active show">
                                 <div class="my-post-content pt-3">
                                     <div class="post-input">
-                                        
-                                        <span type="button" href="javascript:void(0);"  data-bs-toggle="modal" data-bs-target="#postModal"  class="btn btn-outline-primary col-md-12  " style="text-align:left" >¿Qué estás pensando?
+                                    <?php if( $userData["rolid"] == "b7181c04-c9a9-414c-9033-a733786c62b4" ){ ?>
+                                        <?php } else{?>
+                                            <span type="button" href="javascript:void(0);"  data-bs-toggle="modal" data-bs-target="#postModal"  class="btn btn-outline-primary col-md-12  " style="text-align:left" >¿Qué estás pensando?
                                             <a >
                                             </a>
                                         </span>
+                                        <?php } ?>
                                         <!-- Modal -->
                                         <div class="modal fade" id="postModal">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -182,8 +184,14 @@ function todasPublicaciones(){
                                                         ' <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="12" cy="5" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="12" cy="19" r="2"/></g></svg>'+
                                                         '</div>' +
                                                         '<div class="dropdown-menu dropdown-menu-end">' + 
-                                                        '<a data-bs-toggle="modal" data-bs-target="#edit1'+data[indice]['id']+'" class="dropdown-item" href="#">Editar</a>'+
-                                                        '<a data-bs-toggle="modal" data-bs-target="#delete1'+data[indice]['id']+'" class="dropdown-item" href="#">Borrar</a>'+
+                                                        <?php if( $userData["rolid"] == "94819f1d-9ec2-4210-8df8-c14a6851a48f" ){ ?>
+                                                            '<a data-bs-toggle="modal" data-bs-target="#edit1'+data[indice]['id']+'" class="dropdown-item" href="#">Editar</a>'+
+                                                        <?php } else{?>
+                                                            '<a data-bs-toggle="modal" data-bs-target="#edit1'+data[indice]['id']+'" class="dropdown-item" href="#">Editar</a>'+
+                                                            '<a data-bs-toggle="modal" data-bs-target="#delete1'+data[indice]['id']+'" class="dropdown-item" href="#">Borrar</a>'+
+                                                        <?php } ?>
+                                                        
+                                                       
                                                     '</div>'+
                                                     '</div>'+
                                                     '</div>'+
@@ -290,8 +298,12 @@ function todasPublicaciones(){
                                                         ' <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="12" cy="5" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="12" cy="19" r="2"/></g></svg>'+
                                                         '</div>' +
                                                         '<div class="dropdown-menu dropdown-menu-end">' + 
-                                                        '<a data-bs-toggle="modal" data-bs-target="#edit2'+data[indice]['id']+'" class="dropdown-item" href="#">Editar</a>'+
-                                                        '<a data-bs-toggle="modal" data-bs-target="#delete2'+data[indice]['id']+'" class="dropdown-item" href="#">Borrar</a>'+
+                                                        <?php if( $userData["rolid"] == "94819f1d-9ec2-4210-8df8-c14a6851a48f" ){ ?>
+                                                            '<a data-bs-toggle="modal" data-bs-target="#edit1'+data[indice]['id']+'" class="dropdown-item" href="#">Editar</a>'+
+                                                        <?php } else{?>
+                                                            '<a data-bs-toggle="modal" data-bs-target="#edit1'+data[indice]['id']+'" class="dropdown-item" href="#">Editar</a>'+
+                                                            '<a data-bs-toggle="modal" data-bs-target="#delete1'+data[indice]['id']+'" class="dropdown-item" href="#">Borrar</a>'+
+                                                        <?php } ?>
                                                     '</div>'+
                                                     '</div>'+
                                                     '</div>'+
@@ -351,7 +363,7 @@ function editarPublicacion(e){
             headers: {
                 'X-CSRF-Token': csrfToken
             },
-            type: "POST",
+            type: "PUT",
             data: { titulo : titulo , descripcion : descripcion },
             url: "<?= $this->Url->build(["controller" => "publicaciones","action" => "edit" ]);?>/"+id,
             success:function(data){
@@ -370,7 +382,7 @@ function editarPublicacion(e){
             headers: {
                 'X-CSRF-Token': csrfToken
             },
-            type: "POST",
+            type: "DELETE",
             url: "<?= $this->Url->build(["controller" => "publicaciones","action" => "delete" ]);?>/"+id,
             success:function(data){
 

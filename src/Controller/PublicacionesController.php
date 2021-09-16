@@ -28,6 +28,7 @@ class PublicacionesController extends AppController
     }
 
     public function publicacion(){
+        $this->request->allowMethod(['post']);
         $this->viewBuilder()->setLayout("ajax");
         $publicacione = $this->Publicaciones->newEntity();
         $publicacione->usuario_id = $this->request->getSession()->read('Auth.User.id');
@@ -42,7 +43,7 @@ class PublicacionesController extends AppController
     }
 
     public function getPublicaciones(){
-
+        $this->request->allowMethod(['get']);
         $this->viewBuilder()->setLayout("ajax");
         $publicacione = $this->Publicaciones->find('all',
             [
@@ -54,7 +55,7 @@ class PublicacionesController extends AppController
 
     }
     public function getMispublicaciones(){
-
+        $this->request->allowMethod(['get']);
         $this->viewBuilder()->setLayout("ajax");
         $publicacione = $this->Publicaciones->find('all',
             [
@@ -88,6 +89,7 @@ class PublicacionesController extends AppController
      */
     public function add()
     {
+        $this->request->allowMethod(['post']);
         $publicacione = $this->Publicaciones->newEntity();
         $publicacione->usuario_id = $this->request->getSession()->read('Auth.User.id');
         $publicacione->cat_estatu_id = '10714ce4-816d-4df3-8417-282d1e3565dc';
@@ -114,11 +116,12 @@ class PublicacionesController extends AppController
      */
     public function edit($id = null)
     {
+        $this->request->allowMethod(['put']);
         $this->viewBuilder()->setLayout("ajax");
         $publicacione = $this->Publicaciones->get($id, [
             'contain' => [],
         ]);
-        if ($this->request->is('post')) {
+        if ($this->request->is('put')) {
             $publicacione = $this->Publicaciones->patchEntity($publicacione, $this->request->getData());
             if ($this->Publicaciones->save($publicacione)) {
                 return $this->response->withType("application/json")->withStringBody(json_encode(1));
@@ -136,7 +139,7 @@ class PublicacionesController extends AppController
      */
     public function delete($id = null)
     {
-        // $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['delete']);
         $publicacione = $this->Publicaciones->get($id);
         $publicacione->cat_estatu_id = 'd1ef0720-61c0-4608-b65b-9b04892f40a6';
         if ($this->Publicaciones->save($publicacione)) {
