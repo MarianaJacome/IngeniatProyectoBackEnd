@@ -18,7 +18,7 @@
                         <div class="mb-3 col-md-12">
                             <label class="form-label">Menu</label>
                             <select id="inputState" name="menu_id" class="default-select form-control wide">
-                                <option selected>Ninguno...</option>
+                                <option selected value="">Ninguno...</option>
                                 <?php foreach($menus as $menu_){ ?>
                                     <?php if($menu_->id == $menu->menu_id){ ?>
                                         <option selected value="<?= $menu_->id ?>"  <?= $menu_->icon ?> ><?= $menu_->nombre ?></option>

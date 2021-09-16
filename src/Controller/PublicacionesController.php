@@ -41,11 +41,30 @@ class PublicacionesController extends AppController
         return $this->response->withType("application/json")->withStringBody(json_encode(0));
     }
 
-    public function getPublicacion(){
-        
+    public function getPublicaciones(){
+
         $this->viewBuilder()->setLayout("ajax");
-        $publicaciones = $this->Publicaciones->find('all',['condition' => [ 'activo' => 1]]);
-        return $this->response->withType("application/json")->withStringBody(json_encode($publicaciones));
+        $publicacione = $this->Publicaciones->find('all',
+            [
+                'condition' => [ 'activo' => 1 ],
+                'contain' => ['Usuarios'],
+                'order' => ['Publicaciones.created' => 'DESC']
+            ]
+        );
+        return $this->response->withType("application/json")->withStringBody(json_encode($publicacione));
+
+    }
+    public function getMispublicaciones(){
+
+        $this->viewBuilder()->setLayout("ajax");
+        $publicacione = $this->Publicaciones->find('all',
+            [
+                'condition' => [ 'Publicaciones.active' => 0 , 'Publicaciones.user_id' => $this->request->getSession()->read('Auth.User.id') ],
+                'contain' => ['Usuarios' => ['conditions' => ['Usuarios.id' =>  $this->request->getSession()->read('Auth.User.id')]]],
+                'order' => ['Publicaciones.created' => 'DESC']
+            ]
+        );
+        return $this->response->withType("application/json")->withStringBody(json_encode($publicacione));
 
     }
     /**

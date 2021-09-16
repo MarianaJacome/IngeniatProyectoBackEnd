@@ -17,7 +17,7 @@
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Rol</label>
                             <select id="inputState" name="grupo_id" class="default-select form-control wide">
-                                <option selected>Ninguno...</option>
+                                <option selected value="">Ninguno...</option>
                                 <?php foreach($grupos as $grupo){ ?>
                                     <option value="<?= $grupo->id ?>" ><?= $grupo->nombre ?></option>
                                 <?php } ?>

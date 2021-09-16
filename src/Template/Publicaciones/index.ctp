@@ -21,7 +21,7 @@
                 </div>
                 <div class="profile-info">
                     <div class="profile-photo">
-                    <img class="img-fluid rounded-circle"  alt="" src="<?= $this->Url->Image('profile/profile.png') ?>">
+                    <img class="img-fluid rounded-circle" style="width:100px; height:100px; object-fit:cover"src="<?= $userData["imagen"] ? $this->Url->Image('/files/userfiles/'.$userData["id"].'/picture/200.jpg') : $this->Url->Image('/files/default/defaultpic.jpg') ?>" alt="" >
                         <!-- <img src="images/profile/profile.png" class="img-fluid rounded-circle" alt=""> -->
                     </div>
                     <div class="profile-details">
@@ -136,7 +136,7 @@
         </div>
     </div>
     <div class="col-xl-8">
-        <div class="card">
+        <div class="card" style="height:auto !important">
             <div class="card-body">
                 <div class="profile-tab">
                     <div class="custom-tab-1">
@@ -161,13 +161,13 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title">Crear Publicacion</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                                        <button type="button" id="cerrarModal" class="btn-close" data-bs-dismiss="modal">
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
                                                             <input type="text" id="titulo"  name="" class="form-control " placeholder="Titulo">
                                                             <textarea name="textarea" id="descripcion"  rows="15" style="height:150px" class="form-control bg-transparent" placeholder="¿Qué estás pensando?"></textarea>
-                                                            <a href="javascript:void(0);" class="btn btn-primary light me-1 px-3" data-bs-toggle="modal" data-bs-target="#cameraModal"><i class="fa fa-camera m-0"></i> </a>
+                                                            <!-- <a href="javascript:void(0);" class="btn btn-primary light me-1 px-3" data-bs-toggle="modal" data-bs-target="#cameraModal"><i class="fa fa-camera m-0"></i> </a> -->
                                                             <a class="btn btn-primary btn-rounded" id="publicar" href="javascript:void(0)">Publicar</a>
 
                                                     </div>
@@ -175,55 +175,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="profile-uoloaded-post border-bottom-1 pb-5">
-                                        <div class="media pt-5 pb-5">
-                                          
-                                            <img alt="image" class="me-3 rounded" width="75" src="<?= $this->Url->Image('profile/5.jpg') ?>">
-												<div class="media-body">
-													<h5 class="m-b-5"><a href="post-details.html" class="text-black">Mariana Fernanda Jacome Ruiz</a></h5>
-													<p class="mb-0">I shared this on my fb wall a few months back, and I thought.</p>
-												</div>
-										</div>
-                                        <img alt="" class="img-fluid w-100 rounded" src="<?= $this->Url->Image('profile/8.jpg') ?>"> 
-                                    </div>
+                                    <div id="todaslaspublicaciones"></div>
+                                    
                                 </div>
                             </div>
                             <div id="about-me" class="tab-pane fade">
-                            <div class="my-post-content pt-3">
-                                    <div class="profile-uoloaded-post border-bottom-1 pb-5">
-                                        <div class="media pt-5 pb-5">
-                                          
-                                            <img alt="image" class="me-3 rounded" width="75" src="<?= $this->Url->Image('profile/5.jpg') ?>">
-												<div class="media-body">
-													<h5 class="m-b-5"><a href="post-details.html" class="text-black">Mariana Fernanda Jacome Ruiz</a></h5>
-													<p class="mb-0">I shared this on my fb wall a few months back, and I thought.</p>
-												</div>
-										</div>
-                                        <img alt="" class="img-fluid w-100 rounded" src="<?= $this->Url->Image('profile/8.jpg') ?>"> 
-                                    </div>
-                                </div>
+                                <br>
+                            <div id="mispublicaciones"></div>
                         </div>
                     </div>
                     <!-- Modal -->
-                    <div class="modal fade" id="replyModal">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Post Reply</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <textarea class="form-control" rows="4">Message</textarea>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">btn-close</button>
-                                    <button type="button" class="btn btn-primary">Reply</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -234,11 +195,11 @@
     var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>
 
     $('#publicar').click(function(){
-
+        $('#cerrarModal').click();
     var titulo = $('#titulo').val();
     var descripcion = $('#descripcion').val();
 
-    //Validar los campos que no esten vacios
+
 
     $.ajax({
         headers: {
@@ -248,8 +209,132 @@
         data: { titulo : titulo , descripcion : descripcion },
         url: "<?= $this->Url->build(["controller" => "publicaciones","action" => "publicacion"]);?>",
         success:function(data){
-           
+            todasPublicaciones();
+            misPublicaciones();
+            $('#titulo').val("");
+            $('#descripcion').val("");
         }
     })
 })
+
+todasPublicaciones();
+misPublicaciones();
+function todasPublicaciones(){
+        $.ajax({
+            headers: {
+                'X-CSRF-Token': csrfToken
+            },    
+            type: "GET",
+            url: "<?= $this->Url->build(["controller" => "publicaciones","action" => "getPublicaciones"]);?>",
+            success:function(data){
+                $('#todaslaspublicaciones').empty();
+                $(data).each(function(indice,registro){        
+                    var fechaFormat = "";
+                    var fechasyhoras = data[indice]['created'].split("T");
+                    var fecha = fechasyhoras[0].split("-");
+                    var mes = "";
+                    if( fecha[1] == "01"){ mes = "Enero";}
+                    if( fecha[1] == "02"){ mes = "Febrero";}
+                    if( fecha[1] == "03"){ mes = "Marzo";}
+                    if( fecha[1] == "04"){ mes = "Abril";}
+                    if( fecha[1] == "05"){ mes = "Mayo";}
+                    if( fecha[1] == "06"){ mes = "Junio";}
+                    if( fecha[1] == "07"){ mes = "Julio";}
+                    if( fecha[1] == "08"){ mes = "Agosto";}
+                    if( fecha[1] == "09"){ mes = "Septiembre";}
+                    if( fecha[1] == "10"){ mes = "Octubre";}
+                    if( fecha[1] == "11"){ mes = "Noviembre";}
+                    if( fecha[1] == "12"){ mes = "Diciembre";}
+                    var horas = fechasyhoras[1].split("-");
+                    var horaB = horas[0].split(":");
+                    var hora = horaB[0] + ":" + horaB[1];
+
+                    fechaFormat = fecha[2] + " de " + mes + " del " + fecha[0] + " a las " + hora;
+
+                                            $('#todaslaspublicaciones').append('<div class="profile-uoloaded-post border-bottom-1 ">'+
+                                                    '<div class="media ">'+
+                                                        '<img src="<?= $this->Url->Image('/files/userfiles/') ?>'+data[indice]['usuario']['id']+'/picture/200.jpg" alt="image" class="me-3 rounded" width="75" >'+
+                                                            '<div class="media-body">'+
+                                                                ' <span style="font-size:20px"><a href="post-details.html" class="text-black">'+ data[indice]['titulo'] +'</a></span><br>'+
+                                                            ' <small>'+ data[indice]['usuario']['nombre'] + " " + data[indice]['usuario']['apellido'] + " | " + fechaFormat +'</small><br>'+
+                                                            ' <p class="mb-0">'+ data[indice]['descripcion'] +'</p>'+
+                                                                '</div>'+
+                                                                '<div class="col-xl-3">'+
+                                                            '<div class="dropdown custom-dropdown" style="float:right">'+
+                                                            '<div class="btn sharp btn-primary tp-btn" data-bs-toggle="dropdown">'+
+                                                        ' <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="12" cy="5" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="12" cy="19" r="2"/></g></svg>'+
+                                                        '</div>' +
+                                                        '<div class="dropdown-menu dropdown-menu-end">' + 
+                                                        '<a class="dropdown-item" href="#">Editar</a>'+
+                                                        '<a class="dropdown-item" href="#">Archivar</a>'+
+                                                        '<a class="dropdown-item" href="#">Borrar</a>'+
+                                                    '</div>'+
+                                                    '</div>'+
+                                                    '</div>'+
+                                                    '</div>'+
+                                                    '</div>');                
+                })
+            }
+        })
+    }
+
+    function misPublicaciones(){
+        $.ajax({
+            headers: {
+                'X-CSRF-Token': csrfToken
+            },    
+            type: "GET",
+            url: "<?= $this->Url->build(["controller" => "publicaciones","action" => "getMispublicaciones"]);?>",
+            success:function(data){
+                $('#mispublicaciones').empty();
+                $(data).each(function(indice,registro){        
+                    var fechaFormat = "";
+                    var fechasyhoras = data[indice]['created'].split("T");
+                    var fecha = fechasyhoras[0].split("-");
+                    var mes = "";
+                    if( fecha[1] == "01"){ mes = "Enero";}
+                    if( fecha[1] == "02"){ mes = "Febrero";}
+                    if( fecha[1] == "03"){ mes = "Marzo";}
+                    if( fecha[1] == "04"){ mes = "Abril";}
+                    if( fecha[1] == "05"){ mes = "Mayo";}
+                    if( fecha[1] == "06"){ mes = "Junio";}
+                    if( fecha[1] == "07"){ mes = "Julio";}
+                    if( fecha[1] == "08"){ mes = "Agosto";}
+                    if( fecha[1] == "09"){ mes = "Septiembre";}
+                    if( fecha[1] == "10"){ mes = "Octubre";}
+                    if( fecha[1] == "11"){ mes = "Noviembre";}
+                    if( fecha[1] == "12"){ mes = "Diciembre";}
+                    var horas = fechasyhoras[1].split("-");
+                    var horaB = horas[0].split(":");
+                    var hora = horaB[0] + ":" + horaB[1];
+
+                    fechaFormat = fecha[2] + " de " + mes + " del " + fecha[0] + " a las " + hora;
+
+                                            $('#mispublicaciones').append('<div class="profile-uoloaded-post border-bottom-1 ">'+
+                                                    '<div class="media ">'+
+                                                        '<img src="<?= $this->Url->Image('/files/userfiles/') ?>'+data[indice]['usuario']['id']+'/picture/200.jpg" alt="image" class="me-3 rounded" width="75" >'+
+                                                            '<div class="media-body">'+
+                                                                ' <span style="font-size:20px"><a href="post-details.html" class="text-black">'+ data[indice]['titulo'] +'</a></span><br>'+
+                                                            ' <small>'+ data[indice]['usuario']['nombre'] + " " + data[indice]['usuario']['apellido'] + " | " + fechaFormat +'</small><br>'+
+                                                            ' <p class="mb-0">'+ data[indice]['descripcion'] +'</p>'+
+                                                                '</div>'+
+                                                                '<div class="col-xl-3">'+
+                                                            '<div class="dropdown custom-dropdown" style="float:right">'+
+                                                            '<div class="btn sharp btn-primary tp-btn" data-bs-toggle="dropdown">'+
+                                                        ' <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="12" cy="5" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="12" cy="19" r="2"/></g></svg>'+
+                                                        '</div>' +
+                                                        '<div class="dropdown-menu dropdown-menu-end">' + 
+                                                        '<a class="dropdown-item" href="#">Editar</a>'+
+                                                        '<a class="dropdown-item" href="#">Archivar</a>'+
+                                                        '<a class="dropdown-item" href="#">Borrar</a>'+
+                                                    '</div>'+
+                                                    '</div>'+
+                                                    '</div>'+
+                                                    '</div>'+
+                                                    '</div>');                
+                })
+            }
+        })
+    }
+
 </script>
