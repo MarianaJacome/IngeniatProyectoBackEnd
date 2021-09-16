@@ -95,7 +95,7 @@ class PermisosController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        // $this->request->allowMethod(['post', 'delete']);
         $permiso = $this->Permisos->get($id);
         $permiso->activo = 0;
         if ($this->Permisos->save($permiso)) {

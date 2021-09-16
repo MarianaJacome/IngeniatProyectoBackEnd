@@ -46,8 +46,7 @@ class PublicacionesController extends AppController
         $this->viewBuilder()->setLayout("ajax");
         $publicacione = $this->Publicaciones->find('all',
             [
-                'condition' => [ 'activo' => 1 ],
-                'contain' => ['Usuarios'],
+                'contain' => ['Usuarios' => ['conditions' => ['Publicaciones.cat_estatu_id' => '10714ce4-816d-4df3-8417-282d1e3565dc']]],
                 'order' => ['Publicaciones.created' => 'DESC']
             ]
         );
@@ -59,8 +58,7 @@ class PublicacionesController extends AppController
         $this->viewBuilder()->setLayout("ajax");
         $publicacione = $this->Publicaciones->find('all',
             [
-                'condition' => [ 'Publicaciones.active' => 0 , 'Publicaciones.user_id' => $this->request->getSession()->read('Auth.User.id') ],
-                'contain' => ['Usuarios' => ['conditions' => ['Usuarios.id' =>  $this->request->getSession()->read('Auth.User.id')]]],
+                'contain' => ['Usuarios' => ['conditions' => ['Usuarios.id' =>  $this->request->getSession()->read('Auth.User.id') , 'Publicaciones.cat_estatu_id' => '10714ce4-816d-4df3-8417-282d1e3565dc']]],
                 'order' => ['Publicaciones.created' => 'DESC']
             ]
         );
@@ -91,14 +89,16 @@ class PublicacionesController extends AppController
     public function add()
     {
         $publicacione = $this->Publicaciones->newEntity();
+        $publicacione->usuario_id = $this->request->getSession()->read('Auth.User.id');
+        $publicacione->cat_estatu_id = '10714ce4-816d-4df3-8417-282d1e3565dc';
         if ($this->request->is('post')) {
             $publicacione = $this->Publicaciones->patchEntity($publicacione, $this->request->getData());
             if ($this->Publicaciones->save($publicacione)) {
-                $this->Flash->success(__('The publicacione has been saved.'));
+                $this->Flash->success(__('Publicada'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller'=>'dashboard','action' => 'index']);
             }
-            $this->Flash->error(__('The publicacione could not be saved. Please, try again.'));
+            $this->Flash->error(__('Tu publicacion no se pudo publicar con exito.'));
         }
         $usuarios = $this->Publicaciones->Usuarios->find('list', ['limit' => 200]);
         $catEstatus = $this->Publicaciones->CatEstatus->find('list', ['limit' => 200]);
@@ -114,21 +114,17 @@ class PublicacionesController extends AppController
      */
     public function edit($id = null)
     {
+        $this->viewBuilder()->setLayout("ajax");
         $publicacione = $this->Publicaciones->get($id, [
             'contain' => [],
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
+        if ($this->request->is('post')) {
             $publicacione = $this->Publicaciones->patchEntity($publicacione, $this->request->getData());
             if ($this->Publicaciones->save($publicacione)) {
-                $this->Flash->success(__('The publicacione has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                return $this->response->withType("application/json")->withStringBody(json_encode(1));
             }
-            $this->Flash->error(__('The publicacione could not be saved. Please, try again.'));
         }
-        $usuarios = $this->Publicaciones->Usuarios->find('list', ['limit' => 200]);
-        $catEstatus = $this->Publicaciones->CatEstatus->find('list', ['limit' => 200]);
-        $this->set(compact('publicacione', 'usuarios', 'catEstatus'));
+        return $this->response->withType("application/json")->withStringBody(json_encode(0));
     }
 
     /**
@@ -140,14 +136,15 @@ class PublicacionesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        // $this->request->allowMethod(['post', 'delete']);
         $publicacione = $this->Publicaciones->get($id);
-        if ($this->Publicaciones->delete($publicacione)) {
-            $this->Flash->success(__('The publicacione has been deleted.'));
+        $publicacione->cat_estatu_id = 'd1ef0720-61c0-4608-b65b-9b04892f40a6';
+        if ($this->Publicaciones->save($publicacione)) {
+            return $this->response->withType("application/json")->withStringBody(json_encode(1));
         } else {
-            $this->Flash->error(__('The publicacione could not be deleted. Please, try again.'));
+            return $this->response->withType("application/json")->withStringBody(json_encode(0));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->response->withType("application/json")->withStringBody(json_encode(0));
     }
 }

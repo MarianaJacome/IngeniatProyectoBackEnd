@@ -20,7 +20,7 @@
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Descripcion</label>
-                            <input type="text"  id="descripcion" name="descripción" class="form-control" placeholder="">
+                            <input type="text"  id="descripcion" name="descripcion" class="form-control" placeholder="">
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Controlador</label>

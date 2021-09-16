@@ -39,103 +39,7 @@
         </div>
     </div>
     </div>
-    <div class="row">
-    <div class="col-xl-4">
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="profile-statistics">
-                            <div class="text-center">
-                                <div class="row">
-                                    <div class="col">
-                                        <h3 class="m-b-0">150</h3><span>Publicadas</span>
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="m-b-0">140</h3><span>Papelera</span>
-                                    </div>
-                                    <div class="col">
-                                        <h3 class="m-b-0">45</h3><span>Eliminadas</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Modal -->
-                            <div class="modal fade" id="sendMessageModal">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Send Message</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form class="comment-form">
-                                                <div class="row"> 
-                                                    <div class="col-lg-6">
-                                                        <div class="mb-3">
-                                                            <label class="text-black font-w600 form-label">Name <span class="required">*</span></label>
-                                                            <input type="text" class="form-control" value="Author" name="Author" placeholder="Author">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="mb-3">
-                                                            <label class="text-black font-w600 form-label">Email <span class="required">*</span></label>
-                                                            <input type="text" class="form-control" value="Email" placeholder="Email" name="Email">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <div class="mb-3">
-                                                            <label class="text-black font-w600 form-label">Comment</label>
-                                                            <textarea rows="8" class="form-control" name="comment" placeholder="Comment"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <div class="mb-3 mb-0">
-                                                            <input type="submit" value="Post Comment" class="submit btn btn-primary" name="submit">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="profile-news">
-                            <h5 class="text-primary d-inline">Our Latest News</h5>
-                            <div class="media pt-3 pb-3">
-                                <img src="images/profile/5.jpg" alt="image" class="me-3 rounded" width="75">
-                                <div class="media-body">
-                                    <h5 class="m-b-5"><a href="post-details.html" class="text-black">Collection of textile samples</a></h5>
-                                    <p class="mb-0">I shared this on my fb wall a few months back, and I thought.</p>
-                                </div>
-                            </div>
-                            <div class="media pt-3 pb-3">
-                                <img src="images/profile/6.jpg" alt="image" class="me-3 rounded" width="75">
-                                <div class="media-body">
-                                    <h5 class="m-b-5"><a href="post-details.html" class="text-black">Collection of textile samples</a></h5>
-                                    <p class="mb-0">I shared this on my fb wall a few months back, and I thought.</p>
-                                </div>
-                            </div>
-                            <div class="media pt-3 pb-3">
-                                <img src="images/profile/7.jpg" alt="image" class="me-3 rounded" width="75">
-                                <div class="media-body">
-                                    <h5 class="m-b-5"><a href="post-details.html" class="text-black">Collection of textile samples</a></h5>
-                                    <p class="mb-0">I shared this on my fb wall a few months back, and I thought.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-8">
+    <div class="col-xl-12">
         <div class="card" style="height:auto !important">
             <div class="card-body">
                 <div class="profile-tab">
@@ -250,10 +154,23 @@ function todasPublicaciones(){
                     var hora = horaB[0] + ":" + horaB[1];
 
                     fechaFormat = fecha[2] + " de " + mes + " del " + fecha[0] + " a las " + hora;
+                    var pic = "";
+
+                                    $.ajax({
+                                        url : '<?= $this->Url->Image('/files/userfiles/') ?>'+data[indice]['usuario']['id']+'/picture/200.jpg',
+                                        type : "get",
+                                        async: false,
+                                        success : function(userStatus) {
+                                        pic = '<?= $this->Url->Image('/files/userfiles/') ?>'+data[indice]['usuario']['id']+'/picture/200.jpg';
+                                        },
+                                        error: function() {
+                                            pic = "<?= $this->Url->Image('/files/default/defaultpic.jpg') ?>"
+                                        }
+                                    });
 
                                             $('#todaslaspublicaciones').append('<div class="profile-uoloaded-post border-bottom-1 ">'+
                                                     '<div class="media ">'+
-                                                        '<img src="<?= $this->Url->Image('/files/userfiles/') ?>'+data[indice]['usuario']['id']+'/picture/200.jpg" alt="image" class="me-3 rounded" width="75" >'+
+                                                        '<img src="'+pic+'" alt="image" class="me-3 rounded" width="75" >'+
                                                             '<div class="media-body">'+
                                                                 ' <span style="font-size:20px"><a href="post-details.html" class="text-black">'+ data[indice]['titulo'] +'</a></span><br>'+
                                                             ' <small>'+ data[indice]['usuario']['nombre'] + " " + data[indice]['usuario']['apellido'] + " | " + fechaFormat +'</small><br>'+
@@ -265,12 +182,51 @@ function todasPublicaciones(){
                                                         ' <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="12" cy="5" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="12" cy="19" r="2"/></g></svg>'+
                                                         '</div>' +
                                                         '<div class="dropdown-menu dropdown-menu-end">' + 
-                                                        '<a class="dropdown-item" href="#">Editar</a>'+
-                                                        '<a class="dropdown-item" href="#">Archivar</a>'+
-                                                        '<a class="dropdown-item" href="#">Borrar</a>'+
+                                                        '<a data-bs-toggle="modal" data-bs-target="#edit1'+data[indice]['id']+'" class="dropdown-item" href="#">Editar</a>'+
+                                                        '<a data-bs-toggle="modal" data-bs-target="#delete1'+data[indice]['id']+'" class="dropdown-item" href="#">Borrar</a>'+
                                                     '</div>'+
                                                     '</div>'+
                                                     '</div>'+
+                                                    '</div>'+
+                                                    '<div class="modal fade" id="edit1'+data[indice]['id']+'">'+
+                                                        ' <div class="modal-dialog modal-dialog-centered" role="document">'+
+                                                            '  <div class="modal-content">'+
+                                                                '  <div class="modal-header">'+
+                                                                    '  <h5 class="modal-title">Crear Publicacion</h5>'+
+                                                                    '  <button type="button" id="cerrarModal" class="btn-close" data-bs-dismiss="modal">'+
+                                                                    ' </button>'+
+                                                                    '</div>'+
+                                                                    '   <div class="modal-body">'+
+                                                                        '    <input type="text"  id="titulo'+data[indice]['id']+'" class="form-control" placeholder="Titulo" value="'+ data[indice]['titulo']+'">'+
+                                                                        '<textarea name="textarea" id="descripcion'+data[indice]['id']+'"  rows="15" style="height:150px" class="form-control bg-transparent" placeholder="¿Qué estás pensando?">'+ data[indice]['descripcion']+'</textarea>'+
+                                                                        '<a class="btn btn-primary btn-rounded" data-bs-dismiss="modal" id="'+data[indice]['id']+'" href="javascript:void(0)" onclick="editarPublicacion(this);">Publicar</a>'+
+                                                                        '</div>'+
+                                                                        '</div>'+
+                                                                        ' </div>'+
+                                                                        '  </div>'+
+                                                    '<div class="modal fade text-left" id="delete1'+data[indice]['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="true">'+
+                                                    '   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">'+
+                                                    '       <div class="modal-content">'+
+                                                    '           <div class="modal-header">'+
+                                                    '               <h4 class="modal-title" id="myModalLabel6">Eliminando '+ data[indice]['titulo']+'</h4>'+
+                                                    '               <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">'+
+                                                    '                   <span aria-hidden="true">&times;</span>'+
+                                                    '               </button>'+
+                                                    '           </div>'+
+                                                    '           <div class="modal-body">'+
+                                                    '               <p>'+
+                                                    '                  ¿Realmente desea eliminar de manera permanente este registro del sistema?'+
+                                                    '               </p>'+
+                                                    '              <div class="alert alert-danger" role="alert">'+
+                                                    '                   Se eliminará la publicación de la sección de publicaciones.'+
+                                                    '               </div>'+
+                                                    '           </div>'+
+                                                    '           <div class="modal-footer">'+
+                                                    '               <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancelar</button>'+
+                                                    '               <button id="'+data[indice]['id']+'" type="button" class="btn btn-primary"  data-bs-dismiss="modal" onclick="eliminarPublicacion(this);">Aceptar</button>'+
+                                                    '           </div>'+
+                                                    '       </div>'+
+                                                    '   </div>'+
                                                     '</div>'+
                                                     '</div>');                
                 })
@@ -309,10 +265,20 @@ function todasPublicaciones(){
                     var hora = horaB[0] + ":" + horaB[1];
 
                     fechaFormat = fecha[2] + " de " + mes + " del " + fecha[0] + " a las " + hora;
-
+                    $.ajax({
+                                        url : '<?= $this->Url->Image('/files/userfiles/') ?>'+data[indice]['usuario']['id']+'/picture/200.jpg',
+                                        type : "get",
+                                        async: false,
+                                        success : function(userStatus) {
+                                        pic = '<?= $this->Url->Image('/files/userfiles/') ?>'+data[indice]['usuario']['id']+'/picture/200.jpg';
+                                        },
+                                        error: function() {
+                                            pic = "<?= $this->Url->Image('/files/default/defaultpic.jpg') ?>"
+                                        }
+                                    });
                                             $('#mispublicaciones').append('<div class="profile-uoloaded-post border-bottom-1 ">'+
                                                     '<div class="media ">'+
-                                                        '<img src="<?= $this->Url->Image('/files/userfiles/') ?>'+data[indice]['usuario']['id']+'/picture/200.jpg" alt="image" class="me-3 rounded" width="75" >'+
+                                                        '<img src="'+pic+'" alt="image" class="me-3 rounded" width="75" >'+
                                                             '<div class="media-body">'+
                                                                 ' <span style="font-size:20px"><a href="post-details.html" class="text-black">'+ data[indice]['titulo'] +'</a></span><br>'+
                                                             ' <small>'+ data[indice]['usuario']['nombre'] + " " + data[indice]['usuario']['apellido'] + " | " + fechaFormat +'</small><br>'+
@@ -324,17 +290,95 @@ function todasPublicaciones(){
                                                         ' <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="12" cy="5" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="12" cy="19" r="2"/></g></svg>'+
                                                         '</div>' +
                                                         '<div class="dropdown-menu dropdown-menu-end">' + 
-                                                        '<a class="dropdown-item" href="#">Editar</a>'+
-                                                        '<a class="dropdown-item" href="#">Archivar</a>'+
-                                                        '<a class="dropdown-item" href="#">Borrar</a>'+
+                                                        '<a data-bs-toggle="modal" data-bs-target="#edit2'+data[indice]['id']+'" class="dropdown-item" href="#">Editar</a>'+
+                                                        '<a data-bs-toggle="modal" data-bs-target="#delete2'+data[indice]['id']+'" class="dropdown-item" href="#">Borrar</a>'+
                                                     '</div>'+
                                                     '</div>'+
                                                     '</div>'+
+                                                    '</div>'+
+                                                    '<div class="modal fade" id="edit2'+data[indice]['id']+'">'+
+                                                        ' <div class="modal-dialog modal-dialog-centered" role="document">'+
+                                                            '  <div class="modal-content">'+
+                                                                '  <div class="modal-header">'+
+                                                                    '  <h5 class="modal-title">Crear Publicacion</h5>'+
+                                                                    '  <button type="button" id="cerrarModal" class="btn-close" data-bs-dismiss="modal">'+
+                                                                    ' </button>'+
+                                                                    '</div>'+
+                                                                    '   <div class="modal-body">'+
+                                                                        '    <input type="text"  id="titulo'+data[indice]['id']+'" class="form-control" placeholder="Titulo" value="'+ data[indice]['titulo']+'">'+
+                                                                        '<textarea name="textarea" id="descripcion'+data[indice]['id']+'"  rows="15" style="height:150px" class="form-control bg-transparent" placeholder="¿Qué estás pensando?">'+ data[indice]['descripcion']+'</textarea>'+
+                                                                        '<a class="btn btn-primary btn-rounded" data-bs-dismiss="modal" id="'+data[indice]['id']+'" href="javascript:void(0)" onclick="editarPublicacion(this);">Publicar</a>'+
+                                                                        '</div>'+
+                                                                        '</div>'+
+                                                                        ' </div>'+
+                                                                        '  </div>'+
+                                                    '<div class="modal fade text-left" id="delete2'+data[indice]['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="true">'+
+                                                    '   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">'+
+                                                    '       <div class="modal-content">'+
+                                                    '           <div class="modal-header">'+
+                                                    '               <h4 class="modal-title" id="myModalLabel6">Eliminando '+ data[indice]['titulo']+'</h4>'+
+                                                    '               <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">'+
+                                                    '                   <span aria-hidden="true">&times;</span>'+
+                                                    '               </button>'+
+                                                    '           </div>'+
+                                                    '           <div class="modal-body">'+
+                                                    '               <p>'+
+                                                    '                  ¿Realmente desea eliminar de manera permanente este registro del sistema?'+
+                                                    '               </p>'+
+                                                    '              <div class="alert alert-danger" role="alert">'+
+                                                    '                   Se eliminará la publicación de la sección de publicaciones.'+
+                                                    '               </div>'+
+                                                    '           </div>'+
+                                                    '           <div class="modal-footer">'+
+                                                    '               <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancelar</button>'+
+                                                    '               <button id="'+data[indice]['id']+'" type="button" class="btn btn-primary"  data-bs-dismiss="modal" onclick="eliminarPublicacion(this);">Aceptar</button>'+
+                                                    '           </div>'+
+                                                    '       </div>'+
+                                                    '   </div>'+
                                                     '</div>'+
                                                     '</div>');                
                 })
             }
         })
     }
+//Funcion para actualizar el post
+function editarPublicacion(e){
+        var id = e.id;
+        var titulo = $('#titulo' + id).val();
+        var descripcion = $('#descripcion' + id).val();
 
+        $.ajax({
+            headers: {
+                'X-CSRF-Token': csrfToken
+            },
+            type: "POST",
+            data: { titulo : titulo , descripcion : descripcion },
+            url: "<?= $this->Url->build(["controller" => "publicaciones","action" => "edit" ]);?>/"+id,
+            success:function(data){
+
+                todasPublicaciones();
+                misPublicaciones();
+
+            }
+        })
+    }
+
+    function eliminarPublicacion(e){
+        var id = e.id;
+
+        $.ajax({
+            headers: {
+                'X-CSRF-Token': csrfToken
+            },
+            type: "POST",
+            url: "<?= $this->Url->build(["controller" => "publicaciones","action" => "delete" ]);?>/"+id,
+            success:function(data){
+
+                todasPublicaciones();
+                misPublicaciones();
+
+            }
+        })
+    }
+                                    
 </script>

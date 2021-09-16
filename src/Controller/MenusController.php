@@ -100,7 +100,7 @@ class MenusController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        // $this->request->allowMethod(['post', 'delete']);
         $menu = $this->Menus->get($id);
         $menu->activo = 0;
         if ($this->Menus->save($menu)) {
